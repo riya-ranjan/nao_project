@@ -1,0 +1,248 @@
+{"m_agree":
+    {
+        "submotions": [
+            {
+                "submotion_name":"sweep_look",
+                "pct_time":75
+            },
+            {
+                "submotion_name":"nod",
+                "pct_time" : 25
+            }
+        ],
+        "sound": "thank_sharing.mp3"
+
+    },
+ "look_around":{
+    "submotions": [
+        {
+            "submotion_name":"sweep_look",
+            "pct_time":100
+        }
+    ]
+ },
+  "Disclosure Low":{
+    "submotions": [
+        {
+            "animation_name": ["animations/Sit/BodyTalk/Speaking/BodyTalk_9",
+                "animations/Sit/BodyTalk/Speaking/BodyTalk_10",
+                "animations/Sit/BodyTalk/Speaking/BodyTalk_11",
+                "animations/Sit/BodyTalk/Speaking/BodyTalk_12"],
+            "tags": ["me", "I"],
+            "pct_time":100
+        }
+    ]
+ },
+ "Disclosure Medium":{
+    "submotions": [
+        {
+            "animation_name": ["animations/Sit/BodyTalk/Speaking/BodyTalk_1"],
+                "tags": ["me", "I", "scratch head"],
+                "pct_time":100
+        }
+    ]
+ },
+ "Disclosure High":{
+    "submotions": [
+        {
+            "tags":["scratch head","scratch torso", "me", "I"],
+            "pct_time":100
+        }
+    ]
+ },
+ "DiscFollow":{
+    "submotions": [
+        {
+            "pct_time": 100,
+            "animation_name": ["animations/Sit/BodyTalk/Speaking/BodyTalk_1",
+             "animations/Sit/BodyTalk/Speaking/BodyTalk_2",
+             "animations/Sit/BodyTalk/Speaking/BodyTalk_3"
+             ]
+        }
+    ]
+},
+ "m_intro":{
+        "submotions": [
+            {
+                "submotion_name":"RArm_up",
+                "pct_time": 10
+            },
+            {
+                "submotion_name":"RArm_wave",
+                "pct_time": 85
+            },
+            {
+                "submotion_name":"RArm_down",
+                "pct_time": 5
+            }
+        ],
+        "sound": "hello.mp3"
+
+        },
+  "Excited Start":{
+      "submotions": [
+        {
+                "pct_time": 100,
+                "tags": ["victory"]
+            }
+      ]
+  },
+  "dummy":{
+    "submotions": [
+      {
+              "pct_time": 100,
+              "tags": [""]
+          }
+    ]
+    },
+  "Me":{
+    "submotions": [
+      {
+              "pct_time": 100,
+              "tags": ["I"]
+          }
+    ]
+    },
+  "Clarification":{
+  		"submotions": [
+  			{
+                "pct_time": 100,
+                "tags": ["observe", "body language"]
+            }
+  		]
+  },
+ "Group Opening":{
+  		"submotions": [
+  			{
+                "pct_time": 100,
+                "tags": ["observe", "body language"]
+            }
+  		]
+  },
+  "Follow-Up":{
+  		"submotions": [
+  			{
+                "pct_time": 100,
+                "tags": ["body language"]
+            }
+  		]
+  },
+  "Question Low":{
+      "submotions": [
+          {
+              "pct_time": 100,
+              "animation_name": ["animations/Sit/BodyTalk/Speaking/BodyTalk_9",
+                "animations/Sit/BodyTalk/Speaking/BodyTalk_10",
+                "animations/Sit/BodyTalk/Speaking/BodyTalk_11",
+                "animations/Sit/BodyTalk/Speaking/BodyTalk_12"]
+          }
+      ]
+  },
+  "Question Medium":{
+        "submotions": [
+            {
+                "pct_time": 100,
+                "animation_name": ["animations/Sit/BodyTalk/Speaking/BodyTalk_1",
+                 "animations/Sit/BodyTalk/Speaking/BodyTalk_2",
+                 "animations/Sit/BodyTalk/Speaking/BodyTalk_3"
+                 ]
+            }
+        ]
+   },
+   "Question High":{
+    "submotions": [
+        {
+            "pct_time": 100,
+            "animation_name": ["animations/Sit/BodyTalk/Speaking/BodyTalk_4",
+                "animations/Sit/BodyTalk/Speaking/BodyTalk_5",
+                "animations/Sit/BodyTalk/Speaking/BodyTalk_6"],
+            "tags": ["show", "scratch torso"]
+        }
+    ]
+   },
+  "Feelings":{
+  		"submotions": [
+  			{
+                "pct_time": 100,
+                "tags":["me","I"]
+            }
+  		]
+  },
+  "Thoughts":{
+  		"submotions": [
+  			{
+				"tags":["look hand","think"],
+                "pct_time": 100
+            }
+  		]
+  },
+  "Experiences":{
+  		"submotions": [
+  			{
+				"tags":["me","I","look hand"],
+                "pct_time": 30
+            }
+  		]
+  },
+  "Practical":{
+  		"submotions": [
+  			{
+				"tags":["scratch head"],
+                "pct_time": 100
+            }
+  		]
+  },
+  "Humor":{
+  		"submotions": [
+  			{
+				"tags":["happy"],
+                "pct_time": 100
+            }
+  		]
+  },
+  "Agreement":{
+  		"submotions": [
+  			{
+                "animation_name": ["animations/Sit/BodyTalk/Speaking/BodyTalk_9",
+                "animations/Sit/BodyTalk/Speaking/BodyTalk_1",
+                "animations/Sit/BodyTalk/Speaking/BodyTalk_11",
+                "animations/Sit/BodyTalk/Speaking/BodyTalk_12"],
+                "pct_time": 100
+            }
+  		]
+  },
+  "Disagreement":{
+  		"submotions": [
+  			{
+				"animation_name":["animations/Sit/BodyTalk/Speaking/BodyTalk_4",
+                    "animations/Sit/BodyTalk/Speaking/BodyTalk_5",
+                    "animations/Sit/BodyTalk/Speaking/BodyTalk_6"],
+                "pct_time": 100
+            }
+  		]
+  },
+  "Acknowledgement":{
+  		"submotions": [
+  			{
+				"tags":["body language"],
+                "pct_time": 100
+            }
+  		]
+  },
+  "Warning":{
+  		"submotions": [
+  			{
+				"tags":["psst"],
+                "pct_time": 100
+            }
+  		]
+  },
+  "General":{
+      "submotions": [
+          {
+              "tags":["foot","head"],
+              "pct_time":100
+          }
+      ]
+  }
+}

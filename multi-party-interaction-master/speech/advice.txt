@@ -1,0 +1,5 @@
+*KEY* format: advice_speech <CLASSIFICATION>
+*KEY* CLASSIFICATIONs supported: Practical
+*KEY* ---- SCOPEs To Still Add: N/A    | CLASSIFICATIONs To Still Add: N/A ----
+I find it helpful to rest and recharge when I get stressed | Practical
+To avoid getting stressed I try and start work early and break it up into smaller pieces! | Practical

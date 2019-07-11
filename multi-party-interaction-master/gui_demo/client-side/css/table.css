@@ -1,0 +1,92 @@
+table {
+    height: 50%;
+    max-height: 70%;
+    max-width: 100%;
+    border-collapse: separate;
+    border: 3px solid saddlebrown;
+    font-size: 16pt;
+}
+
+tbody tr td {
+    height: fit-content;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #777171;
+    color: wheat;
+}
+
+tbody tr:nth-child(even) {
+    background-color: wheat;
+    color: #777171;
+}
+
+tbody td:nth-child(1) {
+    background-color: sandybrown;
+    color: black;
+}
+
+tbody td button {
+    alignment: center;
+    vertical-align: center;
+    align-self: center;
+}
+
+tbody th {
+    padding: 10px;
+}
+
+
+tbody th {
+    font-weight: bold;
+    background-color: black;
+    color: navajowhite;
+}
+
+tbody th.separator, tbody td.separator {
+    background-color: grey;
+}
+
+tbody td section button {
+    float: left;
+    align-self: center;
+}
+
+tbody td section ul {
+    float: left;
+    align-self: center;
+    max-width: 50%;
+    margin-top: 1px;
+    margin-bottom: 3px;
+}
+
+tbody td button {
+    background-color: #4CAF50; /* Green */
+    /*background-color: #f44336; !* Red *!*/
+    /*background-color: #e7e7e7; !* Gray *!*/
+    /*background-color: #555555; !* Black*!*/
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    /*font-size: 14px;*/
+    font-size: 22px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+tbody td button:hover {
+    /*background-color: #4CAF50; !* Green *!*/
+    background-color: blue; /* Red */
+    /*background-color: #e7e7e7; !* Gray *!*/
+    /*background-color: #555555; !* Black*!*/
+}
+
+tbody td button:disabled {
+    /*background-color: #4CAF50; !* Green *!*/
+    background-color: #c14f47; /* Red */
+    /*background-color: #e7e7e7; !* Gray *!*/
+    /*background-color: #555555; !* Black*!*/
+}

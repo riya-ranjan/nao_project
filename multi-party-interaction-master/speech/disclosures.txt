@@ -1,0 +1,19 @@
+*KEY* Format: disclosure <CLASSIFICATION>
+*KEY* CLASSIFICATIONs supported: Feelings, Thoughts, Experiences, Humor, Disclosure Low, Disclosure Medium, Disclosure High
+*KEY* ---- CLASSIFICATIONs To Still Add: N/A ----
+Sometimes I worry about understanding what everyone else is saying. | Feelings
+Sometimes I worry about if I fit in | Feelings
+Sometimes I worry about if I belong | Feelings
+I feel better after I talk about it | Feelings
+Sometimes I think I am inadequate for this school | Thoughts
+Sometimes I think something bad will happen if I don't get everything perfect | Thoughts
+When I feel stressed I think my circuits might overload | Disclosure Low
+Sometimes I worry about understanding what everyone else is saying | Disclosure Low
+Sometimes I worry if I fit in | Disclosure Medium
+Sometimes I think I am inadequate for this school | Disclosure Medium
+Sometimes I think something bad will happen if I don't get everything perfect | Disclosure High
+Sometimes I worry about if I belong here | Disclosure High
+Does anybody else sometimes feel the same way? | DiscFollow
+Am I the only one that feels this way? | DiscFollow
+Can you guys relate to that? | DiscFollow
+I am stupid | Humor

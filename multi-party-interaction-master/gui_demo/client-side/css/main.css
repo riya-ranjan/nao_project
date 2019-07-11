@@ -1,0 +1,47 @@
+.topLeft {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.topRight {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.bottomLeft {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.bottomRight {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+
+.centerTop {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, 0);
+}
+
+.centerBottom {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, 0%);
+}

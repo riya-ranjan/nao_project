@@ -1,0 +1,3 @@
+websocket-server
+opencv-python
+opencv-contrib-python

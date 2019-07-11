@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plot Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <!--    <script src="lib/Chart.js_2.8/Chart.js"></script>-->
+    <script src="lib/Moment.js_2.24.0/moment.js"></script>
+    <!--    <link rel="stylesheet" type="text/css" href="lib/Chart.js_2.8/Chart.css">-->
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/chart.css">
+    <script src="js/config.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/utils.js"></script>
+    <style>
+        body {
+            font-family: Consolas, "Courier New", Courier, monospace;
+        }
+
+        video {
+            height: auto;
+            width: 48%;
+        }
+
+        div#annotationPromptContainer {
+            position: relative;
+            left: 50%;
+            width: fit-content;
+            padding: 10px;
+            border: 3px solid rgba(255, 159, 64, 1);
+            transform: translate(-50%, 0%);
+        }
+
+    </style>
+    <script>
+        const participantNameList = ["Robot", "White Spot", "Grey Spot", "Black Spot"];
+        const keyPressPlusList = ['e', 'u', 'c', 'n'];
+        const keyPressMinusList = ['r', 'i', 'v', 'm'];
+        const keyPressMap = new Map();
+        const trustTargetList = [];
+
+        const annotationHistoryMap = {
+            "Robot": [],
+            "White Spot": [],
+            "Grey Spot": [],
+            "Black Spot": [],
+        };
+
+        const chartList = [];
+        let isVideoStarted = false;
+        let isVideoEnded = false;
+
+        for (let i = 0; i < participantNameList.length; ++i) {
+            trustTargetList[i] = `Level of Trust in ${participantNameList[i]}`;
+        }
+
+
+        function saveAnnotation(form) {
+            let textBox = form.querySelector("input[name='userID']");
+            let userID = textBox.value.trim().replace(/[^a-z0-9]/gi, '');
+            textBox.value = "";
+
+            let filename = moment().format(`[${userID}_]MM.DD.YYYY_HH[h]MM[m.json]`).toString().toLowerCase();
+            console.log(filename);
+
+            let fileContent = JSON.stringify(annotationHistoryMap);
+            console.log(fileContent);
+
+            let blob = new Blob([fileContent], {type: "data:text/plain"});
+            let url = window.URL.createObjectURL(blob);
+            a.href = url;
+            a.download = filename;
+            a.click();
+            window.URL.revokeObjectURL(url);
+
+            // remove all current history
+            for (const key in annotationHistoryMap) {
+                if (annotationHistoryMap.hasOwnProperty(key)) {
+                    annotationHistoryMap[key].length = 0;
+                }
+            }
+
+            // reset charts to 0
+            chartList.forEach((chartObj) => {
+                chartObj.config.data.datasets[0].data[0] = 0;
+                chartObj.update();
+            });
+        }
+
+        window.onload = function () {
+            // let canvasList = document.querySelectorAll('div.chartDiv canvas');
+            // let canvas = document.getElementById('chart1');
+            let video = document.getElementById("myVideo");
+            let userIDInput = document.querySelector("div#annotationPromptContainer input[name=userID]");
+            let saveAnnotationButton = document.querySelector("div#annotationPromptContainer input[type=submit]");
+
+            let canvasList = [];
+            let ctxList = [];
+
+            // register play event to video
+            video.addEventListener('playing', (event) => {
+                // console.log(event);
+                console.log("Video playing...");
+
+                isVideoStarted = true;
+                isVideoEnded = false;
+            });
+
+            // register end event to video
+            video.addEventListener('ended', (event) => {
+                // console.log(event);
+                console.log("Video ended...");
+
+                isVideoStarted = false;
+                isVideoEnded = true;
+            });
+
+            // register pause event to video
+            video.addEventListener('pause', (event) => {
+                // console.log(event);
+                console.log("Video paused...");
+
+                isVideoStarted = true;
+                isVideoEnded = false;
+            });
+
+            // add charts
+            for (let i = 0; i < 4; ++i) {
+                let canvas = document.getElementById(`chart${i + 1}`);
+                let ctx = canvas.getContext('2d');
+                let chart = createChart(ctx, `Level of Trust in ${participantNameList[i]}`, i);
+
+                canvasList[i] = canvas;
+                ctxList[i] = ctx;
+                chartList[i] = chart;
+
+                let chartMinusEvent = chartButtonOnClick(chart, video, participantNameList[i], 'minus');
+                let chartPlusEvent = chartButtonOnClick(chart, video, participantNameList[i], 'add');
+                keyPressMap.set(keyPressMinusList[i], chartMinusEvent);
+                keyPressMap.set(keyPressPlusList[i], chartPlusEvent);
+
+                document.getElementById(`minusButton${i + 1}`).addEventListener("click", chartMinusEvent);
+                document.getElementById(`plusButton${i + 1}`).addEventListener("click", chartPlusEvent);
+            }
+
+            document.addEventListener('keyup', (event) => {
+                let keyName = event.key;
+
+                if (keyName === undefined || keyName === null) {
+                    return;
+                }
+                keyName = keyName.toLowerCase();
+                console.log(`pressed key: "${keyName}"`);
+
+                let keyPressFunction = keyPressMap.get(keyName);
+
+                if (!keyPressFunction) {
+                    return;
+                }
+
+                keyPressFunction();
+            });
+        }
+    </script>
+</head>
+<body>
+<section id="chartSection1" class="chart topLeft">
+    <div class="chartDiv">
+        <canvas id="chart1"></canvas>
+    </div>
+    <button class="chartButton" id="plusButton1">+1 = 'E'</button>
+    <button class="chartButton" id="minusButton1">-1 = 'R'</button>
+</section>
+<section id="chartSection2" class="chart topRight">
+    <div class="chartDiv">
+        <canvas id="chart2"></canvas>
+    </div>
+    <button class="chartButton" id="plusButton2">+1 = 'U'</button>
+    <button class="chartButton" id="minusButton2">-1 = 'I'</button>
+</section>
+<section id="chartSection3" class="chart bottomLeft">
+    <div class="chartDiv">
+        <canvas id="chart3"></canvas>
+    </div>
+    <button class="chartButton" id="plusButton3">+1 = 'C'</button>
+    <button class="chartButton" id="minusButton3">-1 = 'V'</button>
+</section>
+<section id="chartSection4" class="chart bottomRight">
+    <div class="chartDiv">
+        <canvas id="chart4"></canvas>
+    </div>
+    <button class="chartButton" id="plusButton4">+1 = 'N'</button>
+    <button class="chartButton" id="minusButton4">-1 = 'M'</button>
+</section>
+
+<div class="centerTop" id="instruction">
+    <p>Thank you for participating in the interaction session!
+        We would now like you to help us by watching the video of the interaction you just took part
+        in and rating how your trust in each of the other participants changed over time.
+    </p>
+    <ul>
+        <li>To do this we will have you use your keyboard or the mouse to note when your trust in another
+            participant changed.
+        </li>
+        <li>To indicate someone did something that increased your trust in them either press the +1 button
+            or the 'E', 'U', 'C', or 'N' keys for the robot, the person at the white spot, the person at the
+            grey spot, and the person at the black spot respectively. Similarly, press the -1 or the 'R', 'I',
+            'V', or 'M' keys to indicate that someone did something that negatively affected your trust in
+            them.
+        </li>
+        <li>
+            Ignore you own spot
+        </li>
+    </ul>
+    <div id="annotationPromptContainer" class="centerHorizontal">
+        <form action="#" onsubmit="saveAnnotation(this)">
+            <label>Enter your ID:
+                <input type="text" name="userID">
+            </label>
+            <input type="submit" value="Save annotations">
+        </form>
+    </div>
+</div>
+<div>
+    <video id="myVideo" class="centerBottom" width="16" height="9" controls>
+        <source src="./annotationVideo.mp4" type="video/mp4">
+        <source src="https://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+</div>
+</body>
+</html>

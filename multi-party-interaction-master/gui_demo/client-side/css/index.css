@@ -1,0 +1,37 @@
+
+.panelTitle {
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    color: blue;
+}
+
+#statusIndicator {
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    font-style: italic;
+    font-weight: bold;
+    color: green;
+}
+
+ol#markerHistoryDisplayList {
+    height: 300px;
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: antiquewhite;
+}
+
+div#addresseeContainer {
+    width: 70%;
+    padding: 15px;
+    background-color: darkred;
+    color: wheat;
+    margin-bottom: 10px;
+}
+
+div#systemCommandContainer {
+    width: 70%;
+    padding: 15px;
+    background-color: darkolivegreen;
+    color: wheat;
+    margin-bottom: 10px;
+}
