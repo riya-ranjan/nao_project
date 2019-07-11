@@ -13,7 +13,7 @@ def main():
 
     questions = ["What are you feeling?","Why do you feel that way?","What would you change to improve how you feel?","What can you control in the situation to improve how you feel?","How do you think the other person is feeling"]
     while(True):
-        num = input ("Enter a number between 1-5")
+        num = input ("Enter a number between 1-5: ")
         tts.say(questions[num-1])
 
 
