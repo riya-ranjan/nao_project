@@ -53,15 +53,17 @@ def config_shoulders():
     #shoulder has to move to the 90 degree pos
     shoulderPitch = ["LShoulderPitch", "RShoulderPitch"]
     shoulderAngles = [[0,-0.8],[0, -1]]
-    times = [[1, 1.4], [1, 1.4]]   
+    times = [[1, 1.4], [1, 1.4]]
     isAbsolute = True
     motion.angleInterpolation(shoulderPitch, shoulderAngles, times, isAbsolute)
 
+    time.sleep(0.1)
     shoulderRoll = ["LShoulderRoll", "RShoulderRoll"]
-    shoulderAngles2 = [[-0.2],[-0.9]]
+    shoulderAngles2 = [[0.1],[-0.9]]
     times = [[1],[1]]
     motion.angleInterpolation(shoulderRoll, shoulderAngles2, times, isAbsolute)
 
+    time.sleep(0.1)
     elbowRoll = "LElbowRoll"
     elbowAngles = -1.54
     fractionMaxSpeed = 0.1

@@ -14,30 +14,33 @@ PORT = config.ROBOT_PORT
 
 def main(IP):
     motion = ALProxy("ALMotion", IP, PORT)
-    motion.setStiffnesses("LArm", 1.0) #stiffness must be >1 for robot to move
+    motion.setStiffnesses("LArm", 0.5) #stiffness must be >1 for robot to move
     shoulder = "LShoulderPitch"
-    shoulderAngle = -2.0857
+    motion.closeHand('LHand')
+    shoulderAngle = 0.2
     fractionMaxSpeedShoulder = 0.1
     motion.setAngles(shoulder, shoulderAngle, fractionMaxSpeedShoulder)
 
+    time.sleep(0.5)
     whipJoints = ["LElbowYaw","LWristYaw"]
     angleLists = [[-2.0857, -2, -1.2, -0.6, 0],[-1.8238, -1, -0.2, 0.4, 1]]
     times = [[1, 1.4, 1.8, 2.2, 2.6],[1, 1.4, 1.8, 2.2, 2.6]]
     isAbsolute = True;
     motion.angleInterpolation(whipJoints, angleLists, times, isAbsolute)
 
-    '''
-    elbow = "LElbowYaw" #moves joint across x plane
-    elbowAngle = -119.5*almath.TO_RAD
-    fractionMaxSpeedElbow = 0.1
+    time.sleep(1)
+    #nae nae
+    shoulderAngle2 = [0, -0.8]
+    shoulderTimes = [1, 1.4]
+    motion.angleInterpolation(shoulder, shoulderAngle2, shoulderTimes, isAbsolute)
 
-    motion.setAngles(elbow, elbowAngle, fractionMaxSpeedElbow)
+    time.sleep(1)
+    motion.openHand('LHand')
+    naeJoints = ["LElbowRoll", "LWristYaw"]
+    angleLists2 = [[-1, -0.5, -0.03, -0.5, -1, -0.5, -0.03], [-0.5, 0, 0.2, 0.5, 0.2, 0, -0.5, 0, 0.2, 0.5]]
+    times2 = [[1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8], [1, 1.4, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8, 4.2, 4.6]]
+    motion.angleInterpolation(naeJoints, angleLists2, times2, isAbsolute)
+    motion.openHand('LHand')
 
-    wrist = "LWristYaw"
-    wristAngles = [-1.8238, -1, 0, 1, 1.8238]
-    times = [1, 1.2, 1.4, 1.6, 1.8];
-    isAbsolute = True;
-    motion.angleInterpolation(wrist, wristAngles, times, isAbsolute)
-    '''
 if __name__=="__main__":
     main(IP)
