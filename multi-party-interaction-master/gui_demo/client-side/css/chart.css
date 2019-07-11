@@ -1,0 +1,100 @@
+.chart {
+    min-width: 100px;
+    min-height: 100px;
+    /*width: 500px;*/
+    width: 25%;
+    height: 49%;
+    max-width: 50%;
+    max-height: 49%;
+}
+
+.chartDiv {
+    width: 100%;
+    height: 90%;
+    display: block;
+    max-width: 100%;
+    max-height: 90%;
+}
+
+#instruction {
+    max-height: 40%;
+    max-width: 48%;
+    font-size: large;
+}
+
+#instruction p {
+    margin: 16px;
+}
+
+.topLeft {
+    border: 3px solid rgba(255, 99, 132, 0.7);
+}
+
+.topRight {
+    border: 3px solid rgba(54, 162, 235, 0.7);
+}
+
+.bottomLeft {
+    border: 3px solid rgba(75, 192, 80, 0.7);
+}
+
+.bottomRight {
+    border: 3px solid rgba(153, 102, 255, 0.7);
+}
+
+.centerBottom {
+    border: 3px solid darkred;
+}
+
+.centerTop {
+    border: 3px solid darkred;
+}
+
+.chartButton {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 20px;
+
+    font-family: Consolas, "Courier New", Courier, monospace;
+}
+
+
+section#chartSection1 button.chartButton {
+    background-color: rgba(255, 99, 132, 0.7);
+}
+
+section#chartSection1 button.chartButton:hover {
+    background-color: rgba(255, 99, 132, 1);
+    color: white;
+    font-weight: bold;
+}
+
+section#chartSection2 button.chartButton {
+    background-color: rgba(54, 162, 235, 0.7);
+}
+
+section#chartSection2 button.chartButton:hover {
+    background-color: rgba(54, 162, 235, 1);
+    color: white;
+    font-weight: bold;
+}
+
+section#chartSection3 button.chartButton {
+    background-color: rgba(75, 192, 80, 0.7);
+}
+
+section#chartSection3 button.chartButton:hover {
+    background-color: rgba(75, 192, 80, 1);
+    color: white;
+    font-weight: bold;
+}
+
+section#chartSection4 button.chartButton {
+    background-color: rgba(153, 102, 255, 0.7);
+}
+
+section#chartSection4 button.chartButton:hover {
+    background-color: rgba(153, 102, 255, 1);
+    color: white;
+    font-weight: bold;
+}

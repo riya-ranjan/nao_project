@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Multi-party Interaction</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/button.css">
+    <script src="js/config.js"></script>
+    <script src="js/helper.js"></script>
+    <script src="js/socket.js"></script>
+    <script src="lib/Moment.js_2.24.0/moment.js"></script>
+    <script>
+        const webSocketConfig = {
+            host: "127.0.0.1",
+            port: 5678
+        };
+        let webSocket = null;
+        let timerStartTime = moment();
+        let isRecording = false;
+        const keyPressMap = new Map(Object.entries({
+            w: 'center',
+            a: 'left',
+            d: 'right',
+            s: 'group'
+        }));
+
+        window.onload = function () {
+            let actionButtons = document.querySelectorAll("button.action");
+            let startRecordButton = document.getElementById("startRecordButton");
+            let stopRecordButton = document.getElementById("stopRecordButton");
+            let recordTimerDisplay = document.getElementById("recordTimer");
+
+            webSocket = createWebSocket(webSocketConfig, startRecordButton, stopRecordButton);
+
+            actionButtons.forEach((button) => {
+                button.addEventListener("click", function () {
+                    // disable buttons
+                    toggleButtons(false, actionButtons);
+
+                    let checkedButton = document.querySelector("input[name=direction]:checked");
+                    let msgObj = {
+                        type: "robotCommand",
+                        target: checkedButton.value.trim(),
+                        action: this.value.trim(),
+                        content: this.innerHTML.trim()
+                    };
+                    console.log(msgObj);
+
+                    webSocket.send(JSON.stringify(msgObj));
+
+                    // set button press timeout
+                    setTimeout(() => {
+                        toggleButtons(true, actionButtons);
+
+                        // change the color to purple
+                        this.style.backgroundColor = "purple";
+                    }, BUTTON_PRESS_TIMEOUT);
+                });
+            });
+
+            startRecordButton.addEventListener("click", function () {
+                // disable start record button
+                startRecordButton.disabled = true;
+                // console.log(this.innerHTML.trim());
+                timerStartTime = moment();
+
+                let msgObj = {
+                    type: "systemCommand",
+                    content: "startRecording"
+                };
+                console.log(msgObj);
+                isRecording = true;
+
+                webSocket.send(JSON.stringify(msgObj));
+
+                // set button press timeout
+                setTimeout(() => {
+                    // enable stop record button
+                    stopRecordButton.disabled = false;
+                }, RECORD_TIMEOUT);
+
+            });
+
+            stopRecordButton.addEventListener("click", function () {
+                // disable stop record button
+                stopRecordButton.disabled = true;
+
+                let msgObj = {
+                    type: "systemCommand",
+                    content: "stopRecording"
+                };
+                console.log(msgObj);
+                isRecording = false;
+
+                webSocket.send(JSON.stringify(msgObj));
+
+                // set button press timeout
+                setTimeout(() => {
+                    // enable start record button
+                    startRecordButton.disabled = false;
+                }, RECORD_TIMEOUT);
+
+            });
+
+            setInterval(() => {
+                let timeDiff = moment.duration(moment().diff(timerStartTime));
+
+                if (isRecording) {
+                    // if recording
+                    recordTimerDisplay.innerText = `${Math.floor(timeDiff.asHours())}:${Math.floor(timeDiff.asMinutes())}:${Math.floor(timeDiff.asSeconds())}`;
+                } else {
+                    recordTimerDisplay.innerText = "--:--:--";
+                }
+            }, 1000);
+
+            document.addEventListener('keyup', (event) => {
+                let keyName = event.key;
+
+                if (keyName === undefined || keyName === null) {
+                    return;
+                }
+                keyName = keyName.toLowerCase();
+                console.log(`pressed key: "${keyName}"`);
+
+                let target = keyPressMap.get(keyName);
+
+                if (!target) {
+                    return;
+                }
+
+                // disable buttons
+                toggleButtons(false, actionButtons);
+
+                let msgObj = {
+                    type: "robotCommand",
+                    target: target,
+                    action: "look",
+                    content: "Look"
+                };
+                console.log(msgObj);
+
+                webSocket.send(JSON.stringify(msgObj));
+
+                // set button press timeout
+                setTimeout(() => {
+                    toggleButtons(true, actionButtons);
+                }, BUTTON_PRESS_TIMEOUT);
+            });
+        };
+    </script>
+
+    <style>
+        #recordTimer {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="bodyContainer">
+    <div id="systemCommandContainer">
+        <form>
+            <button class="commandButton systemCommandButton" value="start"
+                    id="startRecordButton">
+                Start recording
+            </button>
+            <button class="commandButton systemCommandButton" value="stop"
+                    id="stopRecordButton" disabled>
+                Stop recording
+            </button>
+            <div class="commandButton systemCommandButton" id="recordTimer"></div>
+        </form>
+    </div>
+
+    <div id="addresseeContainer">
+        <form>
+            <label class="commandButton directionButtonPair radioButton">Left
+                <input type="radio" name="direction" value="left">
+                <span class="checkmark"></span>
+            </label>
+            <label class="commandButton directionButtonPair radioButton">Center
+                <input type="radio" name="direction" value="center" checked>
+                <span class="checkmark"></span>
+            </label>
+            <label class="commandButton directionButtonPair radioButton">Right
+                <input type="radio" name="direction" value="right">
+                <span class="checkmark"></span>
+            </label>
+            <label class="commandButton directionButtonPair radioButton">Group
+                <input type="radio" name="direction" value="group">
+                <span class="checkmark"></span>
+            </label>
+            <button class="action" value="look">Look</button>
+        </form>
+    </div>
+
+    <div id="questionTableContainer">
+        <table>
+            <tr>
+                <th>Level of Sensitivity</th>
+                <th>Questions</th>
+                <th>Disclosures</th>
+                <th class="separator"></th>
+                <th>Responses</th>
+                <th>Other</th>
+            </tr>
+            <tr>
+                <td>
+                    <button class="action" value="qLow">Low</button>
+                </td>
+                <td>
+                    <br>
+                    <button class="action" value="introq">Intro Question</button>
+                    <button class="action" value="say low">What are some study, strategies that you use?</button>
+                    <button class="action" value="say low">Do you find it helpful to study in groups, \pau=500\or by
+                        yourself?
+                    </button>
+                    <br>
+                <td>
+                    <button class="action" value="say discL">When I feel stressed, I think my circuits might overload.
+                    </button>
+                </td>
+                <td class="separator"></td>
+                <td>
+                    <section>
+                        <button class="action" value="agreement">Agreement</button>
+                        <ul>
+                            <li>that makes sense</li>
+                        </ul>
+                    </section>
+                </td>
+                <td>
+                    <button class="action" value="say">Remember, anyone can respond after someone finishes</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Low</td>
+                <td>
+                    <br>
+                    <button class="action" value="say low">What excites you in the classes you \emph=0\take?</button>
+                    <button class="action" value="say low">What motivates you to try hard?</button>
+                    <button class="action" value="say low">What do you like about school?</button>
+                    <br>
+                </td>
+                <td>
+                    <button class="action" value="say discL">Sometimes I worry about understanding what everyone else is
+                        saying
+                    </button>
+                </td>
+                <td class="separator"></td>
+                <td>
+                    <section>
+                        <button class="action" value="disagreement">Disagreement</button>
+                        <ul>
+                            <li>I don't understand that</li>
+                            <li>I don't relate to that</li>
+                        </ul>
+                    </section>
+                </td>
+                <td>
+                    <button class="action" value="say warn">We are getting off topic, could we return to talking about
+                        dealing with
+                        stress?
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="action" value="qMed">Medium</button>
+                </td>
+                <td>
+                    <br>
+                    <button class="action" value="say med">What triggers academic stress for you?</button>
+                    <button class="action" value="say med">Do you believe you can succeed at U.S.C?</button>
+                    <button class="action" value="say med">What are some of the hardest parts of school for you?
+                    </button>
+                    <br/>
+                </td>
+                <td>
+                    <button class="action" value="say discM">Sometimes I worry about if I fit \pau=5\in!</button>
+                </td>
+                <td class="separator"></td>
+                <td>
+                    <section>
+                        <button class="action" value="acknowledgement">Acknowledgement</button>
+                        <ul>
+                            <li>thank you for sharing that</li>
+                            <li>I hear you</li>
+                            <li>thanks</li>
+                            <li>ok</li>
+                        </ul>
+                    </section>
+                </td>
+                <td>
+                    <button class="action" value="say warn">I can't understand you when multiple people talk at once
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>Medium</td>
+                <td>
+                    <br>
+                    <button class="action" value="say med">What does success mean to you?</button>
+                    <button class="action" value="say med">How does success in school change your life for the better?
+                    </button>
+                </td>
+                <td>
+                    <button class="action" value="say discM">Sometimes I think I am inadequate for this school</button>
+                </td>
+                <td class="separator"></td>
+                <td>
+                    <section>
+                        <button class="action" value="followUp">Follow up</button>
+                        <ul>
+                            <li>Does anyone have advice on how to deal with that?</li>
+                            <li>Does anyone else relate that?</li>
+                        </ul>
+                    </section>
+                </td>
+                <td>
+                    <button class="action" value="say">Please \pau=5\go \emph=2\ahead</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="action" value="qHigh">High</button>
+                </td>
+                <td>
+                    <br>
+                    <button class="action" value="say high">What will happen, if you don't succeed in school?</button>
+                    <button class="action" value="say high">Have you ever felt driven to cheat on an exam?</button>
+                    <button class="action" value="say high">Have you ever failed an exam or class? What happened?
+                    </button>
+                    <br>
+                </td>
+                <td>
+                    <button class="action" value="say discH">Sometimes I think something bad will happen if I don't get
+                        everything
+                        perfect
+                    </button>
+                </td>
+                <td class="separator"></td>
+                <td>
+                    <section>
+                        <button class="action" value="clarification">Clarification</button>
+                        <ul>
+                            <li>Can you explain more about that?</li>
+                            <li>How, does that make you feel?</li>
+                            <li>How, does that work?</li>
+                        </ul>
+                    </section>
+                </td>
+                <td>
+                    <button class="action" value="speech in">Intro Speech</button>
+                </td>
+            </tr>
+            <tr>
+                <td>High</td>
+                <td>
+                    <br>
+                    <button class="action" value="say high">What do you do, when you get too stressed?</button>
+                    <button class="action" value="say high">Why, do you think you get stressed?</button>
+                    <button class="action" value="exitq">Exit Question</button>
+                    <br>
+                </td>
+                <td>
+                    <button class="action" value="say discH">Sometimes I worry about if I belong here</button>
+                </td>
+                <td class="separator"></td>
+                <td>
+                    <section>
+                        <button class="action" value="advice">Advice</button>
+                        <ul>
+                            <li>I find it helpful to rest and recharge when I get stressed</li>
+                            <li>To avoid getting stressed I try and start project early and break it into smaller
+                                pieces
+                            </li>
+                        </ul>
+                    </section>
+                </td>
+                <td>
+                    <button class="action" value="speech close">Closing Speech</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+*KEY* question_speech <SCOPE> <CLASSIFICATION>
+*KEY* SCOPEs supported: Group, Individual | CLASSIFICATIONs supported: Clarification, Opening, Follow-Up
+*KEY* ---- SCOPEs To Still Add: N/A    | CLASSIFICATIONs To Still Add: N/A ----
+Can you explain more about that? | Clarification
+How does that work? | Clarification
+How does that make you feel? | Clarification
+What excites you in the classes you take?  | Question Low
+Do you find it helpful to study in groups or by yourself? | Question Low
+What are some study strategies you use? | Question Low
+What motivates you to try hard? | Question Low
+What do you like about school? | Question Low
+What are some of the hardest parts of school for you? | Question Medium
+What triggers academic stress for you? | Question Medium
+Do you believe you can succeed at USC? | Question Medium
+What does success mean to you? | Question Medium
+How does success in school change your life for the better? | Question Medium
+Have you ever been driven to cheat on an exam? | Question High
+Have you ever failed an exam? And what happened to you? | Question High
+Have you ever been driven to cheat on an exam? | Question High
+Why do you think you get stressed? | Question High
+What will happen if don't you succeed in school? | Question High
+Does anyone have advice on how to deal with that? | Follow-Up
+Does anyone else relate that? | Follow-Up

@@ -1,0 +1,11 @@
+*KEY* format: response_speech <CLASSIFICATION>
+*KEY* CLASSIFICATIONs supported: Agreement, Disagreement, Acknowledgement, Warning
+*KEY* ----  CLASSIFICATIONs To Still Add: N/A ----
+That makes sense | Agreement
+I don't understand that | Disagreement
+I don't relate to that. | Disagreement
+Thank you for sharing that | Acknowledgement
+I hear you | Acknowledgement
+thanks  | Acknowledgement
+We are getting off topic | Warning
+I can't understand you when multiple people talk at once. Please slow down | Warning
