@@ -6,7 +6,7 @@ import almath
 import os
 import math
 import csv
-import sys, termios, tty
+import sys
 import json
 import keyboard
 import config
