@@ -1,5 +1,7 @@
 '''
-this code tries to make the robot move its left elbow joint in an outward motion
+@author: Riya Ranjan
+@date: 7/11/19
+@desc: All questions/method calls pertaining to questions asked about bullying for the middle school students will be stored/coded here
 '''
 import sys
 from naoqi import ALProxy
