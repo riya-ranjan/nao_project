@@ -8,7 +8,7 @@ IP = config.ROBOT_IP
 PORT = config.ROBOT_PORT
 
 def main(IP):
-    motion = ALProxy("ALMotion", IP, Port)
+    motion = ALProxy("ALMotion", IP, PORT)
 
     motion = ALProxy("ALMotion", IP, PORT)
     motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
@@ -22,5 +22,5 @@ def main(IP):
     tts = ALProxy("ALTextToSpeech", IP, 9559)
     tts.say("High five!")
 
-    if __name__=="__main__":
-        main(IP)
+if __name__=="__main__":
+     main(IP)
