@@ -48,14 +48,17 @@ def main(IP):
     motion.setAngles(wristYaw, wristYawAngle, fractionMaxSpeedWristYaw)
 
 def config_beginning():
+   
+    shoulderRollBegin = ["LShoulderRoll", "RShoulderRoll"]
+    angleShoulderRoll = [0.5,0.5]
+    motion.setAngles(shoulderRollBegin, angleShoulderRoll, fractionMaxSpeed)
+    time.sleep(1.0)
+
     shoulderPitchBegin = ["LShoulderPitch", "RShoulderPitch"]
     angleShoulderPitch = [1.5, 1.5]
     fractionMaxSpeed = 0.1
     motion.setAngles(shoulderPitchBegin,angleShoulderPitch,fractionMaxSpeed)
 
-    shoulderRollBegin = ["LShoulderRoll", "RShoulderRoll"]
-    angleShoulderRoll = [0.5,0.5]
-    motion.setAngles(shoulderRollBegin, angleShoulderRoll, fractionMaxSpeed)
 
     elbowYawBegin = ["LElbowYaw", "RElbowYaw"]
     angleElbowYaw = [0,0]
