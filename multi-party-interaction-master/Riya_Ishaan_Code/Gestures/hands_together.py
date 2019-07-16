@@ -16,14 +16,19 @@ def main(IP):
     shoulder = ["LShoulderPitch", "RShoulderPitch"]
     motion.openHand("RHand")
     motion.openHand("LHand")
-    shoulderAngles = [0.0, 0.0]
+    shoulderAngles = [0.25, 0.25]
     fractionMaxSpeedShoulder = 0.1
     motion.setAngles(shoulder, shoulderAngles, fractionMaxSpeedShoulder)
+
+    #shoulder roll
+    shoulderRoll = ["LShoulderRoll", "RShoulderRoll"]
+    shoulderRollAngles = [0.0, 0.0]
+    motion.setAngles(shoulderRoll, shoulderRollAngles, fractionMaxSpeedShoulder)
 
     #elbow yaw(tilt)
     time.sleep(0.1)
     elbowYaw = ["LElbowYaw","RElbowYaw"]
-    elbowYawAngle = [-0.5, 1.0]
+    elbowYawAngle = [-0.5, -0.5]
     fractionMaxSpeedElbowYaw = 0.1
     motion.setAngles(elbowYaw, elbowYawAngle, fractionMaxSpeedElbowYaw)
 
