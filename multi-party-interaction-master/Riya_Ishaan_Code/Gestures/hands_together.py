@@ -54,7 +54,7 @@ def config_beginning():
     motion.setAngles(shoulderPitchBegin,angleShoulderPitch,fractionMaxSpeed)
 
     shoulderRollBegin = ["LShoulderRoll", "RShoulderRoll"]
-    angleShoulderRoll = [0.5,0]
+    angleShoulderRoll = [0.5,0.5]
     motion.setAngles(shoulderRollBegin, angleShoulderRoll, fractionMaxSpeed)
 
     elbowYawBegin = ["LElbowYaw", "RElbowYaw"]
