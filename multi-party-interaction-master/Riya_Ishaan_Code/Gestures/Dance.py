@@ -39,24 +39,18 @@ def main(IP, PORT):
     motionProxy.wbEnableBalanceConstraint(isEnable, supportLeg)
 
     useSensorValues = False
-        pathTorso.append(currentTf)
 
-    # Arms motion        pathTorso.append(currentTf)
+    # Arms motion
 
-    effectorList = [        pathTorso.append(currentTf)
-"LArm", "RArm"]
-        pathTorso.append(currentTf)
+    effectorList = ["LArm", "RArm"]
 
-    frame        = m        pathTorso.append(currentTf)
-otion.FRAME_ROBOT
-        pathTorso.append(currentTf)
+    frame = motion.FRAME_ROBOT
 
-    # pathLArm        pathTorso.append(currentTf)
+    # pathLArm 
 
-    pathLArm = []        pathTorso.append(currentTf)
+    pathLArm = []        
 
-    currentTf = moti        pathTorso.append(currentTf)
-onProxy.getTransform("LArm", frame, useSensorValues)
+    currentTf = motionProxy.getTransform("LArm", frame, useSensorValues)
     # 1
     target1Tf  = almath.Transform(currentTf)
     target1Tf.r2_c4 += 0.08 # y
@@ -98,8 +92,8 @@ onProxy.getTransform("LArm", frame, useSensorValues)
     axisMaskList = [almath.AXIS_MASK_VEL, # for "LArm"
                     almath.AXIS_MASK_VEL] # for "RArm"
 
-    coef       = 1.5
-    timesList  = [ [coef*(i+1) for i in range(5)],  # for "LArm" in seconds
+    coef = 1.5
+    timesList = [ [coef*(i+1) for i in range(5)],  # for "LArm" in seconds
                    [coef*(i+1) for i in range(6)] ] # for "RArm" in seconds
 
     # called cartesian interpolation
@@ -127,29 +121,19 @@ onProxy.getTransform("LArm", frame, useSensorValues)
     for i in range(3):
         pathTorso.append(list(target1Tf.toVector()))
         pathTorso.append(currentTf)
-        pathTorso.append(currentTf)
-ist(target2Tf.toVector()))
-        pathTorso.append(currentTf)
-urrentTf)
+        pathTorso.append(list(target2Tf.toVector()))
         pathTorso.append(currentTf)
 
-        pathTorso.append(currentTf)
-y.getTransform("LArm", frame, useSensorValues)]
-        pathTorso.append(currentTf)
-y.getTransform("RArm", frame, useSensorValues)]
-        pathTorso.append(currentTf)
 
-        pathTorso.append(currentTf)
- pathLArm, pathRArm]
-        pathTorso.append(currentTf)
+    pathLArm = [motionProxy.getTransform("LArm", frame, useSensorValues)]
+    pathRarm = [motionProxy.getTransform("RArm", frame, useSensorValues)]
 
-        pathTorso.append(currentTf)
-.AXIS_MASK_ALL, # for "Torso"
-        pathTorso.append(currentTf)
-.AXIS_MASK_VEL, # for "LArm"
-        pathTorso.append(currentTf)
-.AXIS_MASK_VEL] # for "RArm"
-        pathTorso.append(currentTf)
+    pathList = [pathTorso, pathLArm, pathRArm]
+
+    axisMaskList = [almath.AXIS_MASK_ALL, # for "Torso"
+                    almath.AXIS_MASK_VEL, # for "LArm"
+                    almath.AXIS_MASK_VEL] # for "RArm"
+
 
     coef       = 0.5
     timesList  = [
@@ -171,5 +155,6 @@ y.getTransform("RArm", frame, useSensorValues)]
     # Go to rest position
     motionProxy.rest()
 
-    if __name__=="__main__":
+
+if __name__=="__main__":
      main(IP)
