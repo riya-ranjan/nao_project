@@ -28,7 +28,7 @@ def main(IP):
     #elbow yaw(tilt)
     time.sleep(0.1)
     elbowYaw = ["LElbowYaw","RElbowYaw"]
-    elbowYawAngle = [-0.5, -0.5]
+    elbowYawAngle = [-0.5, 0.5]
     fractionMaxSpeedElbowYaw = 0.1
     motion.setAngles(elbowYaw, elbowYawAngle, fractionMaxSpeedElbowYaw)
 
