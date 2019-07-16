@@ -15,8 +15,8 @@ def main(IP, PORT):
                  Whole body balancer must be inactivated at the end of the script
     '''
 
-    motionProxy  = ALProxy("ALMotion", robotIP, PORT)
-    postureProxy = ALProxy("ALRobotPosture", robotIP, PORT)
+    motionProxy  = ALProxy("ALMotion", IP, PORT)
+    postureProxy = ALProxy("ALRobotPosture", IP, PORT)
 
     # Wake up robot
     motionProxy.wakeUp()
