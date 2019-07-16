@@ -141,7 +141,7 @@ def main(IP, PORT):
                   [coef*12],                       # for "LArm" in seconds
                   [coef*12]                        # for "RArm" in seconds
                  ]
-
+SS
     motionProxy.transformInterpolations(
         effectorList, frame, pathList, axisMaskList, timesList)
 
@@ -157,4 +157,4 @@ def main(IP, PORT):
 
 
 if __name__=="__main__":
-     main(IP)
+     main(IP, PORT)
