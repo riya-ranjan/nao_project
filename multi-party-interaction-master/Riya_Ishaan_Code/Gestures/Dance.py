@@ -2,6 +2,7 @@ import argparse
 import motion
 import almath
 import time
+import config
 from naoqi import ALProxy
 
 IP = config.ROBOT_IP
@@ -38,15 +39,24 @@ def main(IP, PORT):
     motionProxy.wbEnableBalanceConstraint(isEnable, supportLeg)
 
     useSensorValues = False
+        pathTorso.append(currentTf)
 
-    # Arms motion
-    effectorList = ["LArm", "RArm"]
+    # Arms motion        pathTorso.append(currentTf)
 
-    frame        = motion.FRAME_ROBOT
+    effectorList = [        pathTorso.append(currentTf)
+"LArm", "RArm"]
+        pathTorso.append(currentTf)
 
-    # pathLArm
-    pathLArm = []
-    currentTf = motionProxy.getTransform("LArm", frame, useSensorValues)
+    frame        = m        pathTorso.append(currentTf)
+otion.FRAME_ROBOT
+        pathTorso.append(currentTf)
+
+    # pathLArm        pathTorso.append(currentTf)
+
+    pathLArm = []        pathTorso.append(currentTf)
+
+    currentTf = moti        pathTorso.append(currentTf)
+onProxy.getTransform("LArm", frame, useSensorValues)
     # 1
     target1Tf  = almath.Transform(currentTf)
     target1Tf.r2_c4 += 0.08 # y
@@ -117,17 +127,29 @@ def main(IP, PORT):
     for i in range(3):
         pathTorso.append(list(target1Tf.toVector()))
         pathTorso.append(currentTf)
-        pathTorso.append(list(target2Tf.toVector()))
+        pathTorso.append(currentTf)
+ist(target2Tf.toVector()))
+        pathTorso.append(currentTf)
+urrentTf)
         pathTorso.append(currentTf)
 
-    pathLArm = [motionProxy.getTransform("LArm", frame, useSensorValues)]
-    pathRArm = [motionProxy.getTransform("RArm", frame, useSensorValues)]
+        pathTorso.append(currentTf)
+y.getTransform("LArm", frame, useSensorValues)]
+        pathTorso.append(currentTf)
+y.getTransform("RArm", frame, useSensorValues)]
+        pathTorso.append(currentTf)
 
-    pathList = [pathTorso, pathLArm, pathRArm]
+        pathTorso.append(currentTf)
+ pathLArm, pathRArm]
+        pathTorso.append(currentTf)
 
-    axisMaskList = [almath.AXIS_MASK_ALL, # for "Torso"
-                    almath.AXIS_MASK_VEL, # for "LArm"
-                    almath.AXIS_MASK_VEL] # for "RArm"
+        pathTorso.append(currentTf)
+.AXIS_MASK_ALL, # for "Torso"
+        pathTorso.append(currentTf)
+.AXIS_MASK_VEL, # for "LArm"
+        pathTorso.append(currentTf)
+.AXIS_MASK_VEL] # for "RArm"
+        pathTorso.append(currentTf)
 
     coef       = 0.5
     timesList  = [
