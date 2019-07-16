@@ -16,11 +16,11 @@ def main(IP):
     shoulder = ["LShoulderPitch", "RShoulderPitch"]
     motion.openHand("RHand")
     motion.openHand("LHand")
-    shoulderAngles = [0.5, 0.5]
+    shoulderAngles = [0.75, 0.75]
     fractionMaxSpeedShoulder = 0.1
     motion.setAngles(shoulder, shoulderAngles, fractionMaxSpeedShoulder)
     time.sleep(1.0)
-    
+
     #shoulder roll
     shoulderRoll = ["LShoulderRoll", "RShoulderRoll"]
     shoulderRollAngles = [0.0, 0.0]
