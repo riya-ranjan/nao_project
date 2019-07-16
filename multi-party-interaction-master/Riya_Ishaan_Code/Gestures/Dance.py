@@ -141,9 +141,8 @@ def main(IP, PORT):
                   [coef*12],                       # for "LArm" in seconds
                   [coef*12]                        # for "RArm" in seconds
                  ]
-SS
-    motionProxy.transformInterpolations(
-        effectorList, frame, pathList, axisMaskList, timesList)
+
+    motionProxy.transformInterpolations(effectorList, frame, pathList, axisMaskList, timesList)
 
     # Deactivate whole body
     isEnabled    = False

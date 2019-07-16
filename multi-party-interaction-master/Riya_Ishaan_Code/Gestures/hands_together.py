@@ -53,7 +53,6 @@ def config_beginning():
     angleShoulderRoll = [0.5,0.5]
     fractionMaxSpeed = 0.1
     motion.setAngles(shoulderRollBegin, angleShoulderRoll, fractionMaxSpeed)
-    time.sleep(1.0)
 
     shoulderPitchBegin = ["LShoulderPitch", "RShoulderPitch"]
     angleShoulderPitch = [1.5, 1.5]
