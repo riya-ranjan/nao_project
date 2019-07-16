@@ -9,10 +9,10 @@ PORT = config.ROBOT_PORT
 motion = ALProxy("ALMotion", IP, PORT)
 
 def main(IP):
-
-    #shoulder pitch(up)
+    config_beginning()
     motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
     motion.setStiffnesses("LArm", 1.0) #stiffness must be >1 for robot to move
+    #shoulder pitch(up)
     shoulder = ["LShoulderPitch", "RShoulderPitch"]
     motion.openHand("RHand")
     motion.openHand("LHand")
@@ -23,7 +23,7 @@ def main(IP):
     #elbow yaw(tilt)
     time.sleep(0.1)
     elbowYaw = ["LElbowYaw","RElbowYaw"]
-    elbowYawAngle = [-1.0, -1.0]
+    elbowYawAngle = [-0.5, 1.0]
     fractionMaxSpeedElbowYaw = 0.1
     motion.setAngles(elbowYaw, elbowYawAngle, fractionMaxSpeedElbowYaw)
 
@@ -41,6 +41,31 @@ def main(IP):
     fractionMaxSpeedWristYaw = 0.1
     motion.setAngles(wristYaw, wristYawAngle, fractionMaxSpeedWristYaw)
 
+def config_beginning():
+    shoulderPitchBegin = ["LShoulderPitch", "RShoulderPitch"]
+    angleShoulderPitch = [1.5, 1.5]
+    fractionMaxSpeed = 0.1
+    motion.setAngles(shoulderPitchBegin,angleShoulderPitch,fractionMaxSpeed)
+
+    shoulderRollBegin = ["LShoulderRoll", "RShoulderRoll"]
+    angleShoulderRoll = [0.5,0]
+    motion.setAngles(shoulderRollBegin, angleShoulderRoll, fractionMaxSpeed)
+
+    elbowYawBegin = ["LElbowYaw", "RElbowYaw"]
+    angleElbowYaw = [0,0]
+    motion.setAngles(elbowYawBegin,angleElbowYaw,fractionMaxSpeed)
+
+    elbowRollBegin = ["LElbowRoll", "RElbowRoll"]
+    angleElbowRoll = [0,0]
+    motion.setAngles(elbowRollBegin,angleElbowRoll,fractionMaxSpeed)
+
+    headBegin = ["HeadPitch", "HeadYaw"]
+    angleHead = [0,0]
+    motion.setAngles(headBegin,angleHead,fractionMaxSpeed)
+
+    wristYawBegin = ["LWristYaw", "RWristYaw"]
+    angleWristYaw = [0,0]
+    motion.setAngles(wristYawBegin,angleWristYaw,fractionMaxSpeed)
 
 if __name__=="__main__":
      main(IP)
