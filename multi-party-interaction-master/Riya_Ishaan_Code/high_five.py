@@ -21,3 +21,6 @@ def main(IP):
 
     tts = ALProxy("ALTextToSpeech", IP, 9559)
     tts.say("High five!")
+
+    if __name__=="__main__":
+        main(IP)
