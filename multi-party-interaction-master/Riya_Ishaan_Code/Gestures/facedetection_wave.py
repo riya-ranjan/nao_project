@@ -34,21 +34,28 @@ class HumanGreeter(object):
         motion = ALProxy("ALMotion", IP, PORT)
         motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
         shoulder = "RShoulderPitch"
-        shoulderAngle = -1.0
-        fractionMaxSpeedShoulder = 0.1
+        shoulderAngle = -0.75
+        ractionMaxSpeedShoulder = 0.1
         motion.setAngles(shoulder, shoulderAngle, fractionMaxSpeedShoulder)
 
         motion.openHand("RHand")
 
-        time.sleep(3.0)
-        motion.setAngles(shoulder, 1.5, fractionMaxSpeedShoulder)
+        elbowYaw = "RElbowYaw"
+        elbowYawAngle =  0.0
+        fractionMaxSpeedElbow = 0.1
+        motion.setAngles(elbowYaw, elbowYawAngle, fractionMaxSpeedElbow)
+    
+        time.sleep(2)
 
-        time.sleep(1)
-        naeJoints = ["RElbowRoll"]
-        angleLists2 = [-1, -0.5, -0.03, -0.5, -1, -0.5, -0.03]
-        times2 = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]
-        motion.angleInterpolation(naeJoints, angleLists2, times2, isAbsolute)
+        #Option 1: wave with elbow movement
+        elbowRoll = "RElbowRoll"
+        angleLists = [1, 0.5, 0.03, 0.5, 1, 0.5, 0.03]
+        times = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]
+        isAbsolute = True
+        motion.angleInterpolation(elbowRoll, angleLists, times, isAbsolute)
 
+
+        
     def on_human_tracked(self, value):
         """
         Callback for event FaceDetected.
@@ -59,6 +66,7 @@ class HumanGreeter(object):
             self.got_face = True
             print "I saw a face!"
             self.tts.say("Hello, you!")
+            waveHand()
             # First Field = TimeStamp.
             timeStamp = value[0]
             print "TimeStamp is: " + str(timeStamp)
