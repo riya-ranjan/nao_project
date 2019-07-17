@@ -18,37 +18,10 @@ def main(IP):
     motion.setStiffnesses("RArm", 1.0)
     motion.setStiffnesses("Head",1.0)
 
-    config_beginning()
-    time.sleep(3.0)
     config_shoulders()
     time.sleep(2.0)
     config_head()
 
-def config_beginning():
-    shoulderPitchBegin = ["LShoulderPitch", "RShoulderPitch"]
-    angleShoulderPitch = [1.5, 1.5]
-    fractionMaxSpeed = 0.1
-    motion.setAngles(shoulderPitchBegin,angleShoulderPitch,fractionMaxSpeed)
-
-    shoulderRollBegin = ["LShoulderRoll", "RShoulderRoll"]
-    angleShoulderRoll = [0.5,0]
-    motion.setAngles(shoulderRollBegin, angleShoulderRoll, fractionMaxSpeed)
-
-    elbowYawBegin = ["LElbowYaw", "RElbowYaw"]
-    angleElbowYaw = [0,0]
-    motion.setAngles(elbowYawBegin,angleElbowYaw,fractionMaxSpeed)
-
-    elbowRollBegin = ["LElbowRoll", "RElbowRoll"]
-    angleElbowRoll = [0,0]
-    motion.setAngles(elbowRollBegin,angleElbowRoll,fractionMaxSpeed)
-
-    headBegin = ["HeadPitch", "HeadYaw"]
-    angleHead = [0,0]
-    motion.setAngles(headBegin,angleHead,fractionMaxSpeed)
-
-    wristYawBegin = ["LWristYaw", "RWristYaw"]
-    angleWristYaw = [0,0]
-    motion.setAngles(wristYawBegin,angleWristYaw,fractionMaxSpeed)
 def config_shoulders():
     #shoulder has to move to the 90 degree pos
     shoulderPitch = ["LShoulderPitch", "RShoulderPitch"]

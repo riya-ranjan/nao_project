@@ -13,7 +13,6 @@ IP = config.ROBOT_IP
 PORT = config.ROBOT_PORT
 motion = ALProxy("ALMotion", IP, PORT)
 def main(IP):
-    config_beginning()
     time.sleep(2.0)
 
     motion.setStiffnesses("LArm", 1.0) #stiffness must be >1 for robot to move
@@ -43,31 +42,6 @@ def main(IP):
     times2 = [[1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8], [1, 1.4, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8, 4.2, 4.6]]
     motion.angleInterpolation(naeJoints, angleLists2, times2, isAbsolute)
     motion.openHand('LHand')
-def config_beginning():
-    shoulderPitchBegin = ["LShoulderPitch", "RShoulderPitch"]
-    angleShoulderPitch = [1.5, 1.5]
-    fractionMaxSpeed = 0.1
-    motion.setAngles(shoulderPitchBegin,angleShoulderPitch,fractionMaxSpeed)
-
-    shoulderRollBegin = ["LShoulderRoll", "RShoulderRoll"]
-    angleShoulderRoll = [0.5,0]
-    motion.setAngles(shoulderRollBegin, angleShoulderRoll, fractionMaxSpeed)
-
-    elbowYawBegin = ["LElbowYaw", "RElbowYaw"]
-    angleElbowYaw = [0,0]
-    motion.setAngles(elbowYawBegin,angleElbowYaw,fractionMaxSpeed)
-
-    elbowRollBegin = ["LElbowRoll", "RElbowRoll"]
-    angleElbowRoll = [0,0]
-    motion.setAngles(elbowRollBegin,angleElbowRoll,fractionMaxSpeed)
-
-    headBegin = ["HeadPitch", "HeadYaw"]
-    angleHead = [0,0]
-    motion.setAngles(headBegin,angleHead,fractionMaxSpeed)
-
-    wristYawBegin = ["LWristYaw", "RWristYaw"]
-    angleWristYaw = [0,0]
-    motion.setAngles(wristYawBegin,angleWristYaw,fractionMaxSpeed)
 
 if __name__=="__main__":
     main(IP)
