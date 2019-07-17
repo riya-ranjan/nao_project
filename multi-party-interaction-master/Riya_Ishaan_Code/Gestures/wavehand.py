@@ -22,10 +22,14 @@ def main(IP):
 
     motion.openHand("RHand")
 
+    time.sleep(3.0)
+    motion.setAngles(shoulder, 1.5, fractionMaxSpeedShoulder)
+
     time.sleep(1)
     naeJoints = ["RElbowRoll"]
     angleLists2 = [-1, -0.5, -0.03, -0.5, -1, -0.5, -0.03]
     times2 = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]
+    isAbsolute = True
     motion.angleInterpolation(naeJoints, angleLists2, times2, isAbsolute)
 
 if __name__=="__main__":
