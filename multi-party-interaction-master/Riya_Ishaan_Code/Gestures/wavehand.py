@@ -27,9 +27,9 @@ def main(IP):
     fractionMaxSpeedElbow = 0.1
     motion.setAngles(elbowYaw, elbowYawAngle, fractionMaxSpeedElbow)
 
-    time.sleep(1)
+    time.sleep(2)
     elbowRoll = "RElbowRoll"
-    angleLists2 = [-1, -0.5, -0.03, -0.5, -1, -0.5, -0.03]
+    angleLists2 = [1, 0.5, 0.03, 0.5, 1, 0.5, 0.03]
     times2 = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]
     isAbsolute = True
     motion.angleInterpolation(elbowRoll, angleLists2, times2, isAbsolute)
