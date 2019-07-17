@@ -110,10 +110,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     try:
         # Initialize qi framework.
-        connection_url = "tcp://" + args.ip + ":" + str(args.port)
+        connection_url = "tcp://" + IP + ":" + str(PORT)
         app = qi.Application(["HumanGreeter", "--qi-url=" + connection_url])
     except RuntimeError:
-        print ("Can't connect to Naoqi at ip \"" + args.ip + "\" on port " + str(args.port) +".\n"
+        print ("Can't connect to Naoqi at ip \"" + IP + "\" on port " + str(PORT) +".\n"
                "Please check your script arguments. Run with -h option for help.")
         sys.exit(1)
 
