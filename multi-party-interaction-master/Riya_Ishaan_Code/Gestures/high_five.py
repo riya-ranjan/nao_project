@@ -1,8 +1,8 @@
-''''
+'''
 @author Ishaan Chandra
 @date  7/16/19
 @descr  makes Nao's hand reach up in the high five position and says high five
-''''
+'''
 
 import sys
 from naoqi import ALProxy
