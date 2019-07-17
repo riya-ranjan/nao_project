@@ -7,30 +7,7 @@ import config
 IP = config.ROBOT_IP
 PORT = config.ROBOT_PORT
 
-class HumanGreeter(object):
-    """
-    A simple class to react to face detection events.
-    """
-
-    def __init__(self, app):
-        """
-        Initialisation of qi framework and event detection.
-        """
-        super(HumanGreeter, self).__init__()
-        app.start()
-        session = app.session
-        # Get the service ALMemory.
-        self.memory = session.service("ALMemory")
-        # Connect the event callback.
-        self.subscriber = self.memory.subscriber("FaceDetected")
-        self.subscriber.signal.connect(self.on_human_tracked)
-        # Get the services ALTextToSpeech and ALFaceDetection.
-        self.tts = session.service("ALTextToSpeech")
-        self.face_detection = session.service("ALFaceDetection")
-        self.face_detection.subscribe("HumanGreeter")
-        self.got_face = False
-
-    def waveHand():
+def waveHand():
         motion = ALProxy("ALMotion", IP, PORT)
         motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
         shoulder = "RShoulderPitch"
@@ -54,6 +31,28 @@ class HumanGreeter(object):
         isAbsolute = True
         motion.angleInterpolation(elbowRoll, angleLists, times, isAbsolute)
 
+class HumanGreeter(object):
+    """
+    A simple class to react to face detection events.
+    """
+
+    def __init__(self, app):
+        """
+        Initialisation of qi framework and event detection.
+        """
+        super(HumanGreeter, self).__init__()
+        app.start()
+        session = app.session
+        # Get the service ALMemory.
+        self.memory = session.service("ALMemory")
+        # Connect the event callback.
+        self.subscriber = self.memory.subscriber("FaceDetected")
+        self.subscriber.signal.connect(self.on_human_tracked)
+        # Get the services ALTextToSpeech and ALFaceDetection.
+        self.tts = session.service("ALTextToSpeech")
+        self.face_detection = session.service("ALFaceDetection")
+        self.face_detection.subscribe("HumanGreeter")
+        self.got_face = False
 
         
     def on_human_tracked(self, value):
