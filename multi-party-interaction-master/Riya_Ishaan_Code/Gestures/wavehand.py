@@ -1,9 +1,8 @@
 ''''
 @author Ishaan Chandra
-@date  7/16/19
-@descr  makes Nao's hand reach up in the high five position and says high five
+@date  7/17/19
+@description 
 ''''
-
 import sys
 from naoqi import ALProxy
 import time
@@ -12,6 +11,7 @@ import config
 
 IP = config.ROBOT_IP
 PORT = config.ROBOT_PORT
+motion = ALProxy("ALMotion", IP, PORT)
 
 def main(IP):
     motion = ALProxy("ALMotion", IP, PORT)
@@ -23,11 +23,14 @@ def main(IP):
 
     motion.openHand("RHand")
 
-    tts = ALProxy("ALTextToSpeech", IP, 9559)
-    tts.say("High five!")
-
     time.sleep(3.0)
     motion.setAngles(shoulder, 1.5, fractionMaxSpeedShoulder)
+
+    time.sleep(1)
+    naeJoints = ["RElbowRoll"]
+    angleLists2 = [-1, -0.5, -0.03, -0.5, -1, -0.5, -0.03]
+    times2 = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]
+    motion.angleInterpolation(naeJoints, angleLists2, times2, isAbsolute)
 
 if __name__=="__main__":
      main(IP)

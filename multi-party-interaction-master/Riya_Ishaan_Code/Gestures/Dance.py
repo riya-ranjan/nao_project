@@ -1,3 +1,9 @@
+''''
+@author Ishaan Chandra
+@date  7/16/19
+@description makes Nao dance
+''''
+
 import argparse
 import motion
 import almath
@@ -43,6 +49,7 @@ def main(IP, PORT):
     # Arms motion
 
     effectorList = ["LArm", "RArm"]
+    currentTf = motionProxy.getTransform("LArm", frame, useSensorValues)
 
     frame = motion.FRAME_ROBOT
 

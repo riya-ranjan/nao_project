@@ -1,3 +1,8 @@
+''''
+@author Ishaan Chandra
+@date  7/16/19
+@description touches Nao's hands and fingers together
+''''
 import sys
 from naoqi import ALProxy
 import time
