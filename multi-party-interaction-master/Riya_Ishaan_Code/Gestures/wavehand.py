@@ -16,21 +16,23 @@ motion = ALProxy("ALMotion", IP, PORT)
 def main(IP):
     motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
     shoulder = "RShoulderPitch"
-    shoulderAngle = -1.0
+    shoulderAngle = -0.5
     fractionMaxSpeedShoulder = 0.1
     motion.setAngles(shoulder, shoulderAngle, fractionMaxSpeedShoulder)
 
     motion.openHand("RHand")
 
-    time.sleep(3.0)
-    motion.setAngles(shoulder, 1.5, fractionMaxSpeedShoulder)
+    elbowYaw = "RElblowYaw"
+    elbowYawAngle =  0.0
+    fractionMaxSpeedElbow = 0.1
+    motion.setAngles(elbowYaw, elbowYawAngle, fractionMaxSpeedElbow)
 
     time.sleep(1)
-    naeJoints = ["RElbowRoll"]
+    elbowRoll = "RElbowRoll"
     angleLists2 = [-1, -0.5, -0.03, -0.5, -1, -0.5, -0.03]
     times2 = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]
     isAbsolute = True
-    motion.angleInterpolation(naeJoints, angleLists2, times2, isAbsolute)
+    motion.angleInterpolation(elbowRoll, angleLists2, times2, isAbsolute)
 
 if __name__=="__main__":
      main(IP)
