@@ -1,8 +1,8 @@
-''''
+'''
 @author Ishaan Chandra
 @date  7/17/19
 @description 
-''''
+'''
 import sys
 from naoqi import ALProxy
 import time
