@@ -22,7 +22,7 @@ def main(IP):
 
     motion.openHand("RHand")
 
-    elbowYaw = "RElblowYaw"
+    elbowYaw = "RElbowYaw"
     elbowYawAngle =  0.0
     fractionMaxSpeedElbow = 0.1
     motion.setAngles(elbowYaw, elbowYawAngle, fractionMaxSpeedElbow)
