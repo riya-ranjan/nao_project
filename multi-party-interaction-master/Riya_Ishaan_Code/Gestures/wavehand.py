@@ -14,7 +14,6 @@ PORT = config.ROBOT_PORT
 motion = ALProxy("ALMotion", IP, PORT)
 
 def main(IP):
-    motion = ALProxy("ALMotion", IP, PORT)
     motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
     shoulder = "RShoulderPitch"
     shoulderAngle = -1.0
@@ -22,9 +21,6 @@ def main(IP):
     motion.setAngles(shoulder, shoulderAngle, fractionMaxSpeedShoulder)
 
     motion.openHand("RHand")
-
-    time.sleep(3.0)
-    motion.setAngles(shoulder, 1.5, fractionMaxSpeedShoulder)
 
     time.sleep(1)
     naeJoints = ["RElbowRoll"]
