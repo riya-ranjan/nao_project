@@ -3,33 +3,10 @@ import time
 import sys
 import argparse
 import config
+from naoqi import ALProxy
 
 IP = config.ROBOT_IP
 PORT = config.ROBOT_PORT
-
-def waveHand():
-        motion = ALProxy("ALMotion", IP, PORT)
-        motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
-        shoulder = "RShoulderPitch"
-        shoulderAngle = -0.75
-        ractionMaxSpeedShoulder = 0.1
-        motion.setAngles(shoulder, shoulderAngle, fractionMaxSpeedShoulder)
-
-        motion.openHand("RHand")
-
-        elbowYaw = "RElbowYaw"
-        elbowYawAngle =  0.0
-        fractionMaxSpeedElbow = 0.1
-        motion.setAngles(elbowYaw, elbowYawAngle, fractionMaxSpeedElbow)
-    
-        time.sleep(2)
-
-        #Option 1: wave with elbow movement
-        elbowRoll = "RElbowRoll"
-        angleLists = [1, 0.5, 0.03, 0.5, 1, 0.5, 0.03]
-        times = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]
-        isAbsolute = True
-        motion.angleInterpolation(elbowRoll, angleLists, times, isAbsolute)
 
 class HumanGreeter(object):
     """
@@ -54,6 +31,29 @@ class HumanGreeter(object):
         self.face_detection.subscribe("HumanGreeter")
         self.got_face = False
 
+    def wave_hand(self):
+        motion = ALProxy("ALMotion", IP, PORT)
+        motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
+        shoulder = "RShoulderPitch"
+        shoulderAngle = -0.75
+        fractionMaxSpeedShoulder = 0.5
+        motion.setAngles(shoulder, shoulderAngle, fractionMaxSpeedShoulder)
+
+        motion.openHand("RHand")
+
+        elbowYaw = "RElbowYaw"
+        elbowYawAngle =  0.0
+        fractionMaxSpeedElbow = 0.5
+        motion.setAngles(elbowYaw, elbowYawAngle, fractionMaxSpeedElbow)
+    
+        time.sleep(1)
+
+        #Option 1: wave with elbow movement
+        elbowRoll = "RElbowRoll"
+        angleLists = [1, 0.5, 0.03, 0.5, 1, 0.5, 0.03]
+        times = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]
+        isAbsolute = True
+        motion.angleInterpolation(elbowRoll, angleLists, times, isAbsolute)
         
     def on_human_tracked(self, value):
         """
@@ -64,8 +64,8 @@ class HumanGreeter(object):
         elif not self.got_face:  # only speak the first time a face appears
             self.got_face = True
             print "I saw a face!"
+            self.wave_hand()
             self.tts.say("Hello, you!")
-            waveHand()
             # First Field = TimeStamp.
             timeStamp = value[0]
             print "TimeStamp is: " + str(timeStamp)
@@ -92,7 +92,7 @@ class HumanGreeter(object):
         print "Starting HumanGreeter"
         try:
             while True:
-                time.sleep(1)
+                time.sleep(10)
         except KeyboardInterrupt:
             print "Interrupted by user, stopping HumanGreeter"
             self.face_detection.unsubscribe("HumanGreeter")
