@@ -1,27 +1,29 @@
 from naoqi import ALProxy
+import time
 import sys
+from MotionMaestro import MotionMaestro
+import RegisterMaestro
 import config
+
+from naoqi import ALBroker
+from naoqi import ALModule
 
 IP = config.ROBOT_IP
 PORT = config.ROBOT_PORT
 
-USAGE = "USAGE:\n" \
-        "python vision_setfacetracking.py [NAO_IP] [0 or 1] \n" \
-        "\nExamples: \n" \
-        "Enable tracking: set_tracking.py 192.168.1.102 1\n" \
-        "Disable tracking: set_tracking.py 192.168.1.102 0"
+
+
 
 
 def set_nao_face_detection_tracking(IP, PORT, tracking_enabled):
     """Make a proxy to nao's ALFaceDetection and enable/disable tracking.
-
     """
     faceProxy = ALProxy("ALFaceDetection", IP, PORT)
 
     print "Will set tracking to '%s' on the robot ..." % tracking_enabled
 
     # Enable or disable tracking.
-    faceProxy.setTrackingEnabled(tracking_enabled).build()
+    faceProxy.setTrackingEnabled(tracking_enabled)
 
     # Just to make sure correct option is set.
     print "Is tracking now enabled on the robot?", faceProxy.isTrackingEnabled()
@@ -29,20 +31,23 @@ def set_nao_face_detection_tracking(IP, PORT, tracking_enabled):
 
 def main():
 
+    myBroker = ALBroker("myBroker","0.0.0.0",0,IP,PORT)
     tracking_enabled = True
+    set_nao_face_detection_tracking(IP, PORT, tracking_enabled)
+    postureProxy=RegisterMaestro.registerPostureProxy()
+    motionProxy=RegisterMaestro.registerMotionProxy()
+    motionMaestro = MotionMaestro(postureProxy,motionProxy)
+    motionMaestro.standUp()
 
-    try:
-        if len(sys.argv) > 1:
-           IP = sys.argv[1]
+    faceProxy = ALProxy("ALFaceDetection", IP, PORT)
 
-        if len(sys.argv) > 2:
-            tracking_enabled = bool(int(sys.argv[2]))
-
-        set_nao_face_detection_tracking(IP, PORT, tracking_enabled)
-
-    except Exception as e:
-        print "Exception Caught: %s\n" % e
-        print USAGE
+    faceVal=faceProxy.learnFace("Folke")
+    print "this is the f-result"
+    print faceVal
+    return 
+    for i in xrange(0,10):
+        print "still active"
+        time.sleep(10)
 
 
 if __name__ == "__main__":
