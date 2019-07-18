@@ -33,7 +33,7 @@ def main():
 
     try:
         if len(sys.argv) > 1:
-            nao_ip = sys.argv[1]
+           IP = sys.argv[1]
 
         if len(sys.argv) > 2:
             tracking_enabled = bool(int(sys.argv[2]))
