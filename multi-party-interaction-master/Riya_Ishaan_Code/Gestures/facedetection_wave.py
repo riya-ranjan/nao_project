@@ -27,24 +27,27 @@ class HumanGreeter(object):
         self.subscriber.signal.connect(self.on_human_tracked)
         # Get the services ALTextToSpeech and ALFaceDetection.
         self.tts = session.service("ALTextToSpeech")
+        self.motion = session.service("ALMotion")
         self.face_detection = session.service("ALFaceDetection")
+        self.face_detection.setTrackingEnabled(True)
         self.face_detection.subscribe("HumanGreeter")
         self.got_face = False
+        self.motion.setStiffnesses("Head", 1.0)
+
 
     def wave_hand(self):
-        motion = ALProxy("ALMotion", IP, PORT)
-        motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
+        self.motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
         shoulder = "RShoulderPitch"
         shoulderAngle = -0.75
         fractionMaxSpeedShoulder = 0.5
-        motion.setAngles(shoulder, shoulderAngle, fractionMaxSpeedShoulder)
+        self.motion.setAngles(shoulder, shoulderAngle, fractionMaxSpeedShoulder)
 
-        motion.openHand("RHand")
+        self.motion.openHand("RHand")
 
         elbowYaw = "RElbowYaw"
         elbowYawAngle =  0.0
         fractionMaxSpeedElbow = 0.5
-        motion.setAngles(elbowYaw, elbowYawAngle, fractionMaxSpeedElbow)
+        self.motion.setAngles(elbowYaw, elbowYawAngle, fractionMaxSpeedElbow)
     
         time.sleep(1)
 
@@ -53,7 +56,7 @@ class HumanGreeter(object):
         angleLists = [1, 0.5, 0.03, 0.5, 1, 0.5, 0.03]
         times = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]
         isAbsolute = True
-        motion.angleInterpolation(elbowRoll, angleLists, times, isAbsolute)
+        self.motion.angleInterpolation(elbowRoll, angleLists, times, isAbsolute)
         
     def on_human_tracked(self, value):
         """
@@ -92,7 +95,7 @@ class HumanGreeter(object):
         print "Starting HumanGreeter"
         try:
             while True:
-                time.sleep(10)
+                time.sleep(1)
         except KeyboardInterrupt:
             print "Interrupted by user, stopping HumanGreeter"
             self.face_detection.unsubscribe("HumanGreeter")
