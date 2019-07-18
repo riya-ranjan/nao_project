@@ -21,7 +21,7 @@ def set_nao_face_detection_tracking(IP, PORT, tracking_enabled):
     print "Will set tracking to '%s' on the robot ..." % tracking_enabled
 
     # Enable or disable tracking.
-    faceProxy.setTrackingEnabled(tracking_enabled)
+    faceProxy.setTrackingEnabled(tracking_enabled).build()
 
     # Just to make sure correct option is set.
     print "Is tracking now enabled on the robot?", faceProxy.isTrackingEnabled()
