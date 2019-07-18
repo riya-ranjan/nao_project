@@ -24,7 +24,7 @@ posture.goToPosture("StandInit", 0.5)
 # Then, start tracker.
 faceTracker.startTracker()
 
-wait = 20
+wait = 50
 
 print "ALFaceTracker successfully started, now show your face to Nao!"
 print "ALFaceTracker will be stopped in", wait, "seconds."
