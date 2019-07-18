@@ -29,7 +29,7 @@ class HumanGreeter(object):
         self.tts = session.service("ALTextToSpeech")
         self.motion = session.service("ALMotion")
         self.face_detection = session.service("ALFaceDetection")
-        self.face_detection.setTrackingEnabled(True).build()
+        self.face_detection.setTrackingEnabled(True)
         self.face_detection.subscribe("HumanGreeter")
         self.got_face = False
         self.motion.setStiffnesses("Head", 1.0)
