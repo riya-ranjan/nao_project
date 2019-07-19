@@ -14,6 +14,7 @@ posture = ALProxy("ALRobotPosture", IP, PORT)
 
 # change tracking from just head to whole body movement
 faceTracker.setWholeBodyOn(True)
+faceTracker.move(True)
 
 # stiffen body
 motion.setStiffnesses("Body", 1.0)
@@ -33,7 +34,7 @@ time.sleep(wait)
 
 # Stop tracker, sit down, remove stiffness
 faceTracker.stopTracker()
-posture.goToPosture("Crouch", 0.2)
-motion.setStiffnesses("Body", 0.0)
+#posture.goToPosture("Crouch", 0.2)
+#motion.setStiffnesses("Body", 0.0)
 
 print "ALFaceTracker stopped."
