@@ -1,8 +1,8 @@
-''''
+'''
 @author Ishaan Chandra
 @date  7/16/19
 @description makes Nao dance
-''''
+'''
 
 import argparse
 import motion
@@ -47,11 +47,11 @@ def main(IP, PORT):
     useSensorValues = False
 
     # Arms motion
+    frame = motion.FRAME_ROBOT
 
     effectorList = ["LArm", "RArm"]
     currentTf = motionProxy.getTransform("LArm", frame, useSensorValues)
 
-    frame = motion.FRAME_ROBOT
 
     # pathLArm 
 

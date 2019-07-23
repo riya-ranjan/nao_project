@@ -35,10 +35,15 @@ def config_shoulders():
     shoulderAngles2 = [[0.1],[-0.9]]
     times = [[1],[1]]
     motion.angleInterpolation(shoulderRoll, shoulderAngles2, times, isAbsolute)
-
     time.sleep(0.1)
-    elbowRoll = "LElbowRoll"
-    elbowAngles = -1.54
+    elbowYaw = ["LElbowYaw", "RElbowYaw"]
+    elbowYawAngles = [0,0]
+    fractionMaxSpeed = 0.1
+    motion.setAngles(elbowYaw, elbowYawAngles, fractionMaxSpeed)
+    time.sleep(0.1)
+
+    elbowRoll = ["LElbowRoll","RElbowRoll"]
+    elbowAngles = [-1.54,0.03]
     fractionMaxSpeed = 0.1
     motion.setAngles(elbowRoll, elbowAngles, fractionMaxSpeed)
 

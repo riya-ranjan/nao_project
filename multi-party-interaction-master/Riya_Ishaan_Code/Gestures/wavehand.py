@@ -30,20 +30,20 @@ def main(IP):
     time.sleep(2)
 
     #Option 1: wave with elbow movement
-    elbowRoll = "RElbowRoll"
-    angleLists = [0.7, 0.5, 0.03, 0.5, 0.7, 0.5, 0.03]
-    times = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]
+    joints = ["RElbowRoll","RWristYaw"]
+    angleLists = [[0.7, 0.5, 0.03, 0.5, 0.7, 0.5, 0.03],[-1.0, -0.5, 0.03, 0.5, 1.0, 0.5, 0]]
+    times = [[1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8],[1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]]
     isAbsolute = True
-    motion.angleInterpolation(elbowRoll, angleLists, times, isAbsolute)
+    motion.angleInterpolation(joints, angleLists, times, isAbsolute)
 
-
+    '''
     #Option 2 wave with wrist movement
     wrist = "RWristYaw"
-    wristAngleLists = [-1.0, -0.5, 0.03, 0.5, 1.0, 0.5, 0]
-    wristTimes = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8]
+    wristAngleLists = 
+    wristTimes = 
     isAbsolute = True
     motion.angleInterpolation(wrist, wristAngleLists, wristTimes, isAbsolute)
-
+    '''
 
 if __name__=="__main__":
      main(IP)
