@@ -16,10 +16,10 @@ PORT = config.ROBOT_PORT
 def main(IP):
     motion = ALProxy("ALMotion", IP, PORT)
     motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
-    shoulder = "RShoulderPitch"
-    shoulderAngle = -1.0
-    fractionMaxSpeedShoulder = 0.1
-    motion.setAngles(shoulder, shoulderAngle, fractionMaxSpeedShoulder)
+    rarm = ["RShoulderPitch", "RElbowYaw"]
+    rarmAngle = [-0.75, 0]
+    fractionMaxSpeedRarm = 0.1
+    motion.setAngles(rarm, rarmAngle, fractionMaxSpeedRarm)
 
     motion.openHand("RHand")
 
