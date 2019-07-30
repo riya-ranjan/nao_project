@@ -8,10 +8,10 @@ PORT = config.ROBOT_PORT
 tts = ALProxy("ALTextToSpeech", IP, 9559)
 
 def main():
-
-    speech = ["I can do cool things like dance!", "whip and nae nae!", "and dab!"]
+    
+    speech = ["I noticed an issue here", "How are you feeling?", "Does anybody else want to share?", "Thanks for sharing with me toady. Good job!", "Bye, everybody"]
     while(True):
-        num = input ("Enter a number between 1-5: ")
+        num = input ("Enter a number between 1-3: ")
         tts.say(speech[num-1])
 
 
