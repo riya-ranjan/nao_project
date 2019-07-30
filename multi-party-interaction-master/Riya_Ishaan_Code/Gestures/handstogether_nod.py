@@ -54,7 +54,7 @@ def main(IP):
     #head
     head = "HeadPitch"
     headAngleLists = [0.25, 0.35, 0.15, -0.15, -.35, -0.25, 0, 0.15, 0.35, 0.15, 0]
-    times = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8, 4.2, 4.6, 5.0, 5.3, 5.6]
+    times = [1, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8, 4.2, 4.6, 5.0, 5.3]
     isAbsolute = True
     motion.angleInterpolation(head, headAngleLists, times, isAbsolute)
 
