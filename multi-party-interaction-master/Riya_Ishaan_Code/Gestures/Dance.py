@@ -15,11 +15,6 @@ IP = config.ROBOT_IP
 PORT = config.ROBOT_PORT
 
 def main(IP, PORT):
-    '''
-        Example of a whole body multiple effectors control "LArm", "RArm" and "Torso"
-        Warning: Needs a PoseInit before executing
-                 Whole body balancer must be inactivated at the end of the script
-    '''
 
     motionProxy  = ALProxy("ALMotion", IP, PORT)
     postureProxy = ALProxy("ALRobotPosture", IP, PORT)
