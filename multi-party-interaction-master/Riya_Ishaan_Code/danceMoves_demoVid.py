@@ -11,7 +11,7 @@ def main():
 
     speech = ["I can do cool things like dance!", "whip and nae nae!", "and dab!"]
     while(True):
-        num = input ("Enter a number between 1-5: ")
+        num = input ("Enter a number between 1-3: ")
         tts.say(speech[num-1])
 
 
