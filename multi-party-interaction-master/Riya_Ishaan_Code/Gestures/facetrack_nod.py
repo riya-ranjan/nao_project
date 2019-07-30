@@ -58,6 +58,7 @@ class HumanGreeter(object):
             self.got_face = True
             print "I saw a face!"
             self.nod()
+            
             # First Field = TimeStamp.
             timeStamp = value[0]
             print "TimeStamp is: " + str(timeStamp)
