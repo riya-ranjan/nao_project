@@ -31,6 +31,7 @@ class HumanGreeter(object):
         self.motion = session.service("ALMotion")
         self.face_detection = session.service("ALFaceDetection")
         self.face_tracker = session.service("ALFaceTracker")
+        self.face_tracker.startTracker()
         self.face_detection.subscribe("HumanGreeter")
         self.posture_setup = session.service("ALRobotPosture")
         self.got_face = False
@@ -69,7 +70,6 @@ class HumanGreeter(object):
             self.got_face = False
         elif not self.got_face:  # only speak the first time a face appears
             self.got_face = True
-            self.face_tracker.startTracker()
             print "I saw a face!"
             self.wave_hand()
             self.tts.say("Hello!")
@@ -103,9 +103,13 @@ class HumanGreeter(object):
         except KeyboardInterrupt:
             print "Interrupted by user, stopping HumanGreeter"
             self.face_tracker.stopTracker()
-            self.posture_setup.goToPosture("Crouch", 0.2)
-            self.motion.setStiffnesses("Body", 0.0)
             self.face_detection.unsubscribe("HumanGreeter")
+            app.stop()
+            while(self.face_tracker.isActive()):
+                self.face_tracker.stopTracker()
+            self.posture_setup.goToPosture("Crouch", 0.2)
+            #self.motion.setStiffnesses("Body", 0.0)
+            
             #stop
             sys.exit(0)
 

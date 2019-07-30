@@ -1,7 +1,7 @@
 import os.path
 
 
-ROBOT_IP = "169.254.28.144"
+ROBOT_IP = "192.168.6.166"
 ROBOT_PORT = 9559
 
 SERVER_HOST = "127.0.0.1"

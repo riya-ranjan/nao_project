@@ -27,7 +27,7 @@ def main(IP):
     tts.say("High five!")
 
     time.sleep(3.0)
-    motion.setAngles(shoulder, 1.5, fractionMaxSpeedShoulder)
+    motion.setAngles("RShoulderPitch", 1.5, fractionMaxSpeedRarm)
 
 if __name__=="__main__":
      main(IP)
