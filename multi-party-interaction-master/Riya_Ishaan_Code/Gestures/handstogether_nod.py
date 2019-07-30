@@ -16,6 +16,8 @@ motion = ALProxy("ALMotion", IP, PORT)
 def main(IP):
     motion.setStiffnesses("RArm", 1.0) #stiffness must be >1 for robot to move
     motion.setStiffnesses("LArm", 1.0) #stiffness must be >1 for robot to move
+    motion.setStiffnesses("Head", 1.0)
+    
     #shoulder pitch(up)
     shoulder = ["LShoulderPitch", "RShoulderPitch"]
     motion.openHand("RHand")
